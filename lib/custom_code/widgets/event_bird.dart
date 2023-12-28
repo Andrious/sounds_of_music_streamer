@@ -6,18 +6,16 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'random_fox.dart';
-import 'package:fluttery_framework/controller.dart' hide AppDrawer;
+import 'random_bird.dart';
+import 'package:fluttery_framework/view.dart' hide AppDrawer;
 
-///
-class RecentFox extends BoxShadowWidget {
-  ///
-  const RecentFox({
+class EventBird extends ClipRRectWidget {
+  const EventBird({
     Key? key,
     required super.width,
     required super.height,
   }) : super(key: key);
 
   @override
-  State createState() => RandomFoxState();
+  State createState() => RandomBirdState();
 }

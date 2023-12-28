@@ -10,3 +10,8 @@ export 'recent_cat.dart' show RecentCat;
 export 'recent_dog.dart' show RecentDog;
 export 'recent_fox.dart' show RecentFox;
 export 'w_h_stateful_widget.dart' show WHStatefulWidget;
+export 'clip_r_rect_widget.dart' show ClipRRectWidget;
+export 'event_bird.dart' show EventBird;
+export 'event_cat.dart' show EventCat;
+export 'event_dog.dart' show EventDog;
+export 'event_fox.dart' show EventFox;

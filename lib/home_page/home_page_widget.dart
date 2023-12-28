@@ -1380,15 +1380,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     ),
                                                   );
                                                 },
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  child: Image.asset(
-                                                    'assets/images/jax.png',
+                                                child: Container(
+                                                  width: 200.0,
+                                                  height: 100.0,
+                                                  child:
+                                                      custom_widgets.EventBird(
                                                     width: 200.0,
                                                     height: 100.0,
-                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
                                               ),
@@ -1407,15 +1405,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     ),
                                                   );
                                                 },
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  child: Image.asset(
-                                                    'assets/images/user.webp',
+                                                child: Container(
+                                                  width: 100.0,
+                                                  height: 210.0,
+                                                  child:
+                                                      custom_widgets.EventCat(
                                                     width: 100.0,
                                                     height: 210.0,
-                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
                                               ),
@@ -1434,15 +1430,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     ),
                                                   );
                                                 },
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  child: Image.asset(
-                                                    'assets/images/user7.png',
+                                                child: Container(
+                                                  width: 100.0,
+                                                  height: 250.0,
+                                                  child:
+                                                      custom_widgets.EventDog(
                                                     width: 100.0,
                                                     height: 250.0,
-                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
                                               ),
@@ -1461,15 +1455,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     ),
                                                   );
                                                 },
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  child: Image.asset(
-                                                    'assets/images/user6.png',
+                                                child: Container(
+                                                  width: 400.0,
+                                                  height: 140.0,
+                                                  child:
+                                                      custom_widgets.EventFox(
                                                     width: 400.0,
                                                     height: 140.0,
-                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
                                               ),

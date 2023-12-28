@@ -7,12 +7,10 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'random_fox.dart';
-import 'package:fluttery_framework/controller.dart' hide AppDrawer;
+import 'package:fluttery_framework/view.dart' hide AppDrawer;
 
-///
-class RecentFox extends BoxShadowWidget {
-  ///
-  const RecentFox({
+class EventFox extends ClipRRectWidget {
+  const EventFox({
     Key? key,
     required super.width,
     required super.height,
