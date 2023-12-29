@@ -41,8 +41,6 @@ abstract class BoxShapeCircleWidget extends FFStatefulWidget {
   State<StatefulWidget> createState();
 }
 
-String? apiKEY;
-
 /// The State object allows for a web service to be called.
 class ImageAPIStateX<T extends FFStatefulWidget> extends StateX<T>
     implements ImageAPIState {
@@ -99,8 +97,6 @@ abstract class ImageAPIState {
   ///
   final String? message;
 }
-
-final crypt = StringCrypt();
 
 /// This is the 'image API' State Object Controller.
 class ImageAPIController extends StateXController {
@@ -172,22 +168,22 @@ class ImageAPIController extends StateXController {
   @override
   Future<bool> initAsync() async {
     bool init;
-    String apiKEY;
-    String apiKEY2;
-    try {
-      crypt.test();
 
+    try {
       init = await _loadImage();
-      // apiKEY =
-      //     await 'FaISdWAR05grTEuj1cxdZoQ1giwL13zXPPcm9hXE88Xjc09EkGjOTsRm'.en;
-      apiKEY2 =
-          await 'ZTMtSH42lxqwbT2dPXeJKkgUgNfmwTMVuDeTWtXWa2C6KnpiwhNicbQmo9yY4vdZHC6O+vhhA/rVwPpIzzNh/g=='
+      apiKEY ??=
+          'liYxRskqljyclu+mmWy95ka5yREiWtvuq2fTpYN92C4YpufhQ/gMVegYbWPqmeboaFD+owZSli87QQUhSfrnsw=='
               .de;
+      dpg ??= 'uDMMZd5H+EHN0+H6vUyw6RupnxYXWKWp/SGi77RIpHA='.de;
     } catch (e) {
       init = false;
     }
     return init;
   }
+
+  // String? apiKEY;
+  //
+  String? dpg;
 
   /// Load the image to
   Future<bool> _loadImage() async {
@@ -316,6 +312,6 @@ class InheritController extends StateXController {
 }
 
 extension StringUtils on String {
-  Future<String> get en => crypt.en(this);
-  Future<String> get de => crypt.de(this);
+  String get en => encrypt(this);
+  String get de => decrypt(this);
 }

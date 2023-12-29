@@ -46,6 +46,8 @@ class _EditProfileUserWidgetState extends State<EditProfileUserWidget> {
       );
     }
 
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

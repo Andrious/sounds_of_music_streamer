@@ -77,6 +77,12 @@ class HttpService {
   }
 }
 
+String? apiKEY;
+
+final key = 'SbP1S2lC/ABJQQwCK1f5Zh79fZ4ogZRsCzXRyJHUk6c=';
+
+final iv = '9897180ef0320b1c4f1abf3fddbb6b2b';
+
 class PexelsAPI {
   factory PexelsAPI() => _this ??= PexelsAPI._();
   PexelsAPI._();
@@ -99,122 +105,22 @@ class PexelsAPI {
   }
 }
 
-///
-class StringCrypt {
-  ///
-  StringCrypt({
-    String? password,
-    String? key,
-  }) {
-    //
-    if (password == null || password.trim().isEmpty) {
-      password = null;
-    } else {
-      password = password.trim().padLeft(_length, '+');
-    }
-
-    if (key == null || key.trim().isEmpty) {
-      key = null;
-    } else {
-      key = key.trim().padLeft(_length, '+');
-    }
-
-    _iv = key == null ? IV.fromSecureRandom(_length) : IV.fromUtf8(key);
-
-    final _key = password == null
-        ? ee.Key.fromSecureRandom(_length)
-        : ee.Key.fromUtf8(password);
-
-    _encrypter = Encrypter(AES(_key));
+String encrypt(String? text) {
+  //
+  var en = '';
+  if (text != null && text.isNotEmpty) {
+    final enc = Encrypter(AES(ee.Key.fromBase64(key)));
+    en = enc.encrypt(text, iv: IV.fromBase16(iv)).base64;
   }
-  IV? _iv;
-  late Encrypter _encrypter;
-  // The required length
-  final int _length = 16; // 32;
+  return en;
+}
 
-  ///
-  Future<String> en(String data, [String? key]) => encrypt(data, key);
-
-  ///
-  Future<String> encrypt(String data, [String? key]) async {
-    //
-    if (key == null || key.trim().isEmpty) {
-      key = null;
-    } else {
-      key = key.trim().padLeft(_length, '+');
-    }
-
-    final iv = key == null ? _iv : IV.fromUtf8(key);
-
-    String encrypt;
-    try {
-      encrypt = _encrypter.encrypt(data, iv: iv).base64;
-    } catch (ex) {
-      encrypt = '';
-      getError(ex);
-    }
-    return encrypt;
+String decrypt(String? text) {
+  //
+  var de = '';
+  if (text != null && text.isNotEmpty) {
+    final enc = Encrypter(AES(ee.Key.fromBase64(key)));
+    de = enc.decrypt(ee.Key.fromBase64(text), iv: IV.fromBase16(iv));
   }
-
-  ///
-  Future<String> de(String data, [String? key]) => decrypt(data, key);
-
-  ///
-  Future<String> decrypt(String data, [String? key]) async {
-    //
-    if (key == null || key.trim().isEmpty) {
-      key = null;
-    } else {
-      key = key.trim().padLeft(_length, '+');
-    }
-
-    final iv = key == null ? _iv : IV.fromUtf8(key);
-
-    String decrypt;
-    try {
-      decrypt = _encrypter.decrypt(Encrypted.fromBase64(data), iv: iv);
-    } catch (ex) {
-      decrypt = '';
-      getError(ex);
-    }
-    return decrypt;
-  }
-
-  ///
-  bool get hasError => _error != null;
-
-  ///
-  bool get inError => _error != null;
-  Object? _error;
-
-  ///
-  Exception? getError([Object? error]) {
-    // Return the stored exception
-    Exception? ex;
-    if (_error != null) {
-      ex = _error as Exception;
-    }
-    // Empty the stored exception
-    if (error == null) {
-      _error = null;
-    } else {
-      if (error is! Exception) {
-        error = Exception(error.toString());
-      }
-      _error = error;
-    }
-    // Return the exception just past if any.
-    return ex ??= error as Exception;
-  }
-
-  void test() {
-    final plainText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
-
-    final key = ee.Key.fromSecureRandom(32);
-    final iv = IV.fromSecureRandom(16);
-    final encrypter = Encrypter(AES(key));
-
-    final encrypted = encrypter.encrypt(plainText, iv: iv);
-    final decrypted = encrypter.decrypt(encrypted, iv: iv);
-  }
+  return de;
 }

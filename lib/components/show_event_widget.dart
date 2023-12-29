@@ -66,6 +66,8 @@ class _ShowEventWidgetState extends State<ShowEventWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
       child: Container(
