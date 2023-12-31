@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 
 import 'index.dart'; // Imports other custom widgets
 
+export 'package:json_response/json_response.dart';
+
 import 'image_a_p_i_state_x.dart' show BoxShapeCircleWidget;
-import 'package:fluttery_framework/controller.dart' hide AppDrawer;
 
 ///
 class RandomBird extends BoxShapeCircleWidget {
@@ -27,7 +28,7 @@ class RandomBird extends BoxShapeCircleWidget {
 class RandomBirdState extends ImageAPIStateX<FFStatefulWidget> {
   RandomBirdState()
       : super(
-          controller: BirdController(),
+//          controller: BirdController(),
           uri: Uri(
             scheme: 'https',
             host: 'shibe.online',
@@ -36,20 +37,20 @@ class RandomBirdState extends ImageAPIStateX<FFStatefulWidget> {
         );
 }
 
-/// This SOC is associated with the Bird images and works with
-/// InheritBird StatefulWidget and the InheritedWidget, _BirdInherited
-class BirdController extends StateXController {
-  ///
-  factory BirdController() => _this ??= BirdController._();
-  BirdController._();
-  static BirdController? _this;
-
-  /// Link this Controller's Widget to a specific InheritedWidget
-  /// The InheritedWidget is the first State object it registered with.
-  @override
-  bool dependOnInheritedWidget(BuildContext? context) =>
-      states.first.dependOnInheritedWidget(context);
-
-  /// Rebuild the InheritedWidget to also rebuild its dependencies.
-  void newAnimals() => states.first.notifyClients();
-}
+// /// This SOC is associated with the Bird images and works with
+// /// InheritBird StatefulWidget and the InheritedWidget, _BirdInherited
+// class BirdController extends StateXController {
+//   ///
+//   factory BirdController() => _this ??= BirdController._();
+//   BirdController._();
+//   static BirdController? _this;
+//
+//   /// Link this Controller's Widget to a specific InheritedWidget
+//   /// The InheritedWidget is the first State object it registered with.
+//   @override
+//   bool dependOnInheritedWidget(BuildContext? context) =>
+//       states.first.dependOnInheritedWidget(context);
+//
+//   /// Rebuild the InheritedWidget to also rebuild its dependencies.
+//   void newAnimals() => states.first.notifyClients();
+// }

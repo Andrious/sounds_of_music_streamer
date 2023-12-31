@@ -1376,7 +1376,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 onTap: () async {
                                                   Navigator.push(
                                                     context,
-                                                    MaterialPageRoute(
+                                                    MaterialPageRoute<void>(
                                                       builder: (context) =>
                                                           ListEventsWidget(),
                                                     ),
@@ -1401,7 +1401,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 onTap: () async {
                                                   Navigator.push(
                                                     context,
-                                                    MaterialPageRoute(
+                                                    MaterialPageRoute<void>(
                                                       builder: (context) =>
                                                           ListEventsWidget(),
                                                     ),
@@ -1426,7 +1426,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 onTap: () async {
                                                   Navigator.push(
                                                     context,
-                                                    MaterialPageRoute(
+                                                    MaterialPageRoute<void>(
                                                       builder: (context) =>
                                                           ListEventsWidget(),
                                                     ),

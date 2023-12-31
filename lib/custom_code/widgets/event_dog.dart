@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'random_dog.dart';
-import 'package:fluttery_framework/view.dart' hide AppDrawer;
 
 class EventDog extends ClipRRectWidget {
   const EventDog({

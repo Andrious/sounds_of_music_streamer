@@ -77,11 +77,9 @@ class HttpService {
   }
 }
 
+FFAppState? appState;
 String? apiKEY;
-
-final key = 'SbP1S2lC/ABJQQwCK1f5Zh79fZ4ogZRsCzXRyJHUk6c=';
-
-final iv = '9897180ef0320b1c4f1abf3fddbb6b2b';
+String? host;
 
 class PexelsAPI {
   factory PexelsAPI() => _this ??= PexelsAPI._();
@@ -92,7 +90,7 @@ class PexelsAPI {
     //
     final http.Response response = await http.get(
         Uri.parse(
-            'https://api.pexels.com/v1/search?query=$searchQuery&per_page=30&page=1'),
+            'api.pexels.com/v1/search?query=$searchQuery&per_page=30&page=1'),
         headers: {'Authorization': apiKEY!});
 
     final Map<String, dynamic> jsonData = jsonDecode(response.body);
@@ -107,6 +105,8 @@ class PexelsAPI {
 
 String encrypt(String? text) {
   //
+  final key = appState!.key;
+  final iv = appState!.iv;
   var en = '';
   if (text != null && text.isNotEmpty) {
     final enc = Encrypter(AES(ee.Key.fromBase64(key)));
@@ -117,6 +117,8 @@ String encrypt(String? text) {
 
 String decrypt(String? text) {
   //
+  final key = appState!.key;
+  final iv = appState!.iv;
   var de = '';
   if (text != null && text.isNotEmpty) {
     final enc = Encrypter(AES(ee.Key.fromBase64(key)));

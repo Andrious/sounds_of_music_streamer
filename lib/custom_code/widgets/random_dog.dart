@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'image_a_p_i_state_x.dart' show ImageAPIStateX, BoxShapeCircleWidget;
-import 'package:fluttery_framework/controller.dart' hide AppDrawer;
 
 ///
 class RandomDog extends BoxShapeCircleWidget {
@@ -25,7 +24,7 @@ class RandomDog extends BoxShapeCircleWidget {
 class RandomDogState extends ImageAPIStateX<FFStatefulWidget> {
   RandomDogState()
       : super(
-          controller: DogController(),
+//          controller: DogController(),
           uri: Uri(
             scheme: 'https',
             host: 'dog.ceo',
@@ -35,19 +34,19 @@ class RandomDogState extends ImageAPIStateX<FFStatefulWidget> {
         );
 }
 
-///
-class DogController extends StateXController {
-  ///
-  factory DogController() => _this ??= DogController._();
-  DogController._();
-  static DogController? _this;
-
-  /// Link this Controller's Widget to a specific InheritedWidget
-  /// The InheritedWidget is the first State object it registered with.
-  @override
-  bool dependOnInheritedWidget(BuildContext? context) =>
-      states.first.dependOnInheritedWidget(context);
-
-  /// Rebuild the InheritedWidget to also rebuild its dependencies.
-  void newAnimals() => states.first.notifyClients();
-}
+// ///
+// class DogController extends StateXController {
+//   ///
+//   factory DogController() => _this ??= DogController._();
+//   DogController._();
+//   static DogController? _this;
+//
+//   /// Link this Controller's Widget to a specific InheritedWidget
+//   /// The InheritedWidget is the first State object it registered with.
+//   @override
+//   bool dependOnInheritedWidget(BuildContext? context) =>
+//       states.first.dependOnInheritedWidget(context);
+//
+//   /// Rebuild the InheritedWidget to also rebuild its dependencies.
+//   void newAnimals() => states.first.notifyClients();
+// }

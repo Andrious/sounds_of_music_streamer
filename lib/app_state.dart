@@ -74,7 +74,7 @@ class FFAppState extends ChangeNotifier {
     secureStorage.delete(key: 'ff_iv');
   }
 
-  String _host = 'uDMMZd5H+EHN0+H6vUyw6RupnxYXWKWp/SGi77RIpHA=';
+  String _host = 'sTcRO90YrwvA0Ka3okTKjg==';
   String get host => _host;
   set host(String _value) {
     _host = _value;

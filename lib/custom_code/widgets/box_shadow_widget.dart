@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:fluttery_framework/controller.dart' hide AppDrawer;
-import 'package:fluttery_framework/view.dart' hide AppDrawer;
-
 ///
 abstract class BoxShadowWidget extends FFStatefulWidget {
   ///

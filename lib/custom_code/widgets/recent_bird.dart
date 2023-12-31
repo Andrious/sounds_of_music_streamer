@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'random_bird.dart';
-import 'package:fluttery_framework/controller.dart' hide AppDrawer;
 
 ///
 class RecentBird extends BoxShadowWidget {

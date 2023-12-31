@@ -14,8 +14,7 @@ import 'f_f_stateful_widget.dart';
 import 'clip_r_rect_widget.dart';
 import 'package:encrypt/encrypt.dart' as ee;
 import 'package:http/http.dart' as http;
-import 'package:fluttery_framework/controller.dart' hide AppDrawer;
-import 'package:fluttery_framework/view.dart' hide AppDrawer;
+import 'package:state_extended/state_extended.dart';
 
 ///
 abstract class BoxShapeCircleWidget extends FFStatefulWidget {
@@ -42,32 +41,38 @@ abstract class BoxShapeCircleWidget extends FFStatefulWidget {
 }
 
 /// The State object allows for a web service to be called.
-class ImageAPIStateX<T extends FFStatefulWidget> extends StateX<T>
-    implements ImageAPIState {
+class ImageAPIStateX<T extends FFStatefulWidget> extends StateX<T> {
   ///
   ImageAPIStateX({
     required this.uri,
     this.message,
+    this.headers,
     StateXController? controller,
   }) : super(controller: controller) {
     //
-    final id = add(ImageAPIController(fit: BoxFit.cover));
-    // Retrieve the Controller by its unique id.
-    _con = controllerById(id) as ImageAPIController;
+    if (controller == null) {
+      final id = add(ImageAPIController(fit: BoxFit.cover));
+      // Retrieve the Controller by its unique id.
+      _con = controllerById(id) as ImageAPIController;
+    } else {
+      _con = controller as ImageAPIController;
+    }
   }
 
   ///
-  @override
   final Uri? uri;
 
   ///
-  @override
   final String? message;
+
+  ///
+  final Map<String, String>? headers;
 
   late ImageAPIController _con;
 
+  // Allows for an InheritedWidget
   @override
-  Widget buildAndroid(context) {
+  Widget buildIn(context) {
     controller?.dependOnInheritedWidget(context);
     return GestureDetector(
       onTap: _con.onTap,
@@ -80,22 +85,6 @@ class ImageAPIStateX<T extends FFStatefulWidget> extends StateX<T>
   /// in the corresponding initAsync() routine.
   @override
   bool onAsyncError(FlutterErrorDetails details) => false;
-
-  /// Currently not providing an 'iOS' version of the interface.
-  @override
-  Widget buildiOS(BuildContext context) => buildAndroid(context);
-}
-
-///
-abstract class ImageAPIState {
-  ///
-  ImageAPIState({required this.uri, required this.message});
-
-  ///
-  final Uri? uri;
-
-  ///
-  final String? message;
 }
 
 /// This is the 'image API' State Object Controller.
@@ -171,19 +160,11 @@ class ImageAPIController extends StateXController {
 
     try {
       init = await _loadImage();
-      apiKEY ??=
-          'liYxRskqljyclu+mmWy95ka5yREiWtvuq2fTpYN92C4YpufhQ/gMVegYbWPqmeboaFD+owZSli87QQUhSfrnsw=='
-              .de;
-      dpg ??= 'uDMMZd5H+EHN0+H6vUyw6RupnxYXWKWp/SGi77RIpHA='.de;
     } catch (e) {
       init = false;
     }
     return init;
   }
-
-  // String? apiKEY;
-  //
-  String? dpg;
 
   /// Load the image to
   Future<bool> _loadImage() async {
@@ -191,6 +172,7 @@ class ImageAPIController extends StateXController {
     _data = await _getURIData();
 
     if (_data.isNotEmpty) {
+      //
       image = Image.network(
         _data[0],
         scale: scale ?? 1,
@@ -244,15 +226,17 @@ class ImageAPIController extends StateXController {
     final List<String> data = [];
 
     // Cast to the abstract class with the two properties.
-    final api = state as ImageAPIState;
+    final api = state as ImageAPIStateX;
 
     final message = api.message;
 
     final uri = api.uri;
 
+    final headers = api.headers;
+
     if (uri != null) {
       //
-      final http.Response response = await http.get(uri);
+      final http.Response response = await http.get(uri, headers: headers);
 
       final jsonResponse = json.decode(response.body);
 
@@ -296,6 +280,16 @@ class ImageAPIController extends StateXController {
   @override
   void onAsyncError(FlutterErrorDetails details) {
     super.onAsyncError(details);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (appState == null) {
+      appState = FFAppState();
+      apiKEY = appState!.apiKEY.de;
+      host = appState!.host.de;
+    }
   }
 }
 
